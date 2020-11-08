@@ -29,12 +29,24 @@ class NewRepository {
     var params = {"apiKey": apiKey};
     try {
       Response response = await _dio.get(getSourceUrl, queryParameters: params);
-      print('------------  ${response.data}');
       return SourceResponse.fromJson(response.data);
     } catch (error, stackTrace) {
       print(
           "getSources Repository Error occured: $error, stackTrace: $stackTrace");
       return SourceResponse.withError(error);
+    }
+  }
+
+  Future<ArticleResponse> getHotNews() async {
+    var params = {"apiKey": apiKey, "q": "anime", "sortBy": "popularity"};
+    try {
+      Response response =
+          await _dio.get(everythingUrl, queryParameters: params);
+      return ArticleResponse.fromJson(response.data);
+    } catch (error, stackTrace) {
+      print(
+          "getHotNews Repository Error occured: $error, stackTrace: $stackTrace");
+      return ArticleResponse.withError(error);
     }
   }
 }

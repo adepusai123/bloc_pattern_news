@@ -7,7 +7,7 @@ import 'package:news_retry_app/elements/error_element.dart';
 import 'package:news_retry_app/elements/loader_element.dart';
 import 'package:news_retry_app/models/article_model.dart';
 import 'package:news_retry_app/models/article_response_model.dart';
-import 'package:timeago/src/timeago.dart' as timeago;
+import 'package:timeago/timeago.dart' as timeago;
 
 class HeadlineSliderWidget extends StatefulWidget {
   @override
