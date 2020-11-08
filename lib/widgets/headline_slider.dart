@@ -25,7 +25,6 @@ class _HeadlineSliderWidgetState extends State<HeadlineSliderWidget> {
     return StreamBuilder<ArticleResponse>(
         stream: getTopHeadlineBloc.subject.stream,
         builder: (context, AsyncSnapshot<ArticleResponse> snapshot) {
-          print('------ ${snapshot.hasData}');
           if (snapshot.hasData) {
             if (snapshot.data.error != null && snapshot.data.error.length > 0) {
               return buildErrorWidget(snapshot.data.error);

@@ -33,7 +33,7 @@ class Source {
   String name;
   String description;
   String url;
-  Category category;
+  String category;
   String language;
   String country;
 
@@ -42,7 +42,7 @@ class Source {
         name: json["name"],
         description: json["description"],
         url: json["url"],
-        category: categoryValues.map[json["category"]],
+        category: json["category"],
         language: json["language"],
         country: json["country"],
       );
@@ -52,42 +52,8 @@ class Source {
         "name": name,
         "description": description,
         "url": url,
-        "category": categoryValues.reverse[category],
+        "category": category,
         "language": language,
         "country": country,
       };
-}
-
-enum Category {
-  GENERAL,
-  BUSINESS,
-  TECHNOLOGY,
-  SPORTS,
-  ENTERTAINMENT,
-  HEALTH,
-  SCIENCE
-}
-
-final categoryValues = EnumValues({
-  "business": Category.BUSINESS,
-  "entertainment": Category.ENTERTAINMENT,
-  "general": Category.GENERAL,
-  "health": Category.HEALTH,
-  "science": Category.SCIENCE,
-  "sports": Category.SPORTS,
-  "technology": Category.TECHNOLOGY
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => new MapEntry(v, k));
-    }
-    return reverseMap;
-  }
 }
