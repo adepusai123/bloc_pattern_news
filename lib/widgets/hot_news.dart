@@ -54,7 +54,6 @@ class _HotNewsWidgetState extends State<HotNewsWidget> {
     } else {
       return Container(
         height: 300,
-        color: Colors.amberAccent,
         child: ListView.builder(
           itemBuilder: (context, index) {
             return buildHotNewsTile(articles[index]);
@@ -69,6 +68,7 @@ class _HotNewsWidgetState extends State<HotNewsWidget> {
     Size size = MediaQuery.of(context).size;
     return Container(
       padding: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: GestureDetector(
         onTap: () {},
         child: Container(
