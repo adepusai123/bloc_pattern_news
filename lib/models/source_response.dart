@@ -12,15 +12,14 @@ SourceResponse sourceResponseFromJson(String str) =>
 String sourceResponseToJson(SourceResponse data) => json.encode(data.toJson());
 
 class SourceResponse {
-  SourceResponse({
-    this.status,
-    this.sources,
-  });
+  SourceResponse({this.status, this.sources, this.error});
 
+  String error;
   String status;
   List<Source> sources;
 
   factory SourceResponse.fromJson(Map<String, dynamic> json) => SourceResponse(
+        error: "",
         status: json["status"],
         sources:
             List<Source>.from(json["sources"].map((x) => Source.fromJson(x))),
@@ -28,6 +27,13 @@ class SourceResponse {
 
   Map<String, dynamic> toJson() => {
         "status": status,
+        "error": error,
         "sources": List<dynamic>.from(sources.map((x) => x.toJson())),
       };
+
+  factory SourceResponse.withError(String errorValue) => SourceResponse(
+        error: errorValue,
+        status: "error",
+        sources: List(),
+      );
 }

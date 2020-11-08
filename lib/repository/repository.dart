@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:news_retry_app/models/article_response_model.dart';
+import 'package:news_retry_app/models/source_response.dart';
 
 class NewRepository {
   static String mainUrl = "http://newsapi.org/v2";
@@ -21,6 +22,18 @@ class NewRepository {
       print(
           "getTopHeadlines Repository Error occured: $error, stackTrace: $stackTrace");
       return ArticleResponse.withError(error);
+    }
+  }
+
+  Future<SourceResponse> getSources() async {
+    var params = {"apiKey": apiKey};
+    try {
+      Response response = await _dio.get(getSourceUrl, queryParameters: params);
+      return SourceResponse.fromJson(response.data);
+    } catch (error, stackTrace) {
+      print(
+          "getSources Repository Error occured: $error, stackTrace: $stackTrace");
+      return SourceResponse.withError(error);
     }
   }
 }
