@@ -7,6 +7,7 @@ import 'package:news_retry_app/elements/error_element.dart';
 import 'package:news_retry_app/elements/loader_element.dart';
 import 'package:news_retry_app/models/article_model.dart';
 import 'package:news_retry_app/models/article_response_model.dart';
+import 'package:timeago/src/timeago.dart' as timeago;
 
 class HeadlineSliderWidget extends StatefulWidget {
   @override
@@ -122,7 +123,7 @@ class _HeadlineSliderWidgetState extends State<HeadlineSliderWidget> {
             ),
             Positioned(
               child: Text(
-                'Timestamp',
+                timeAgo(e.publishedAt),
                 style: TextStyle(
                   color: Colors.orangeAccent,
                   fontSize: 9,
@@ -133,5 +134,9 @@ class _HeadlineSliderWidgetState extends State<HeadlineSliderWidget> {
         ),
       ),
     );
+  }
+
+  String timeAgo(DateTime date) {
+    return timeago.format(date, allowFromNow: true, locale: 'en');
   }
 }
