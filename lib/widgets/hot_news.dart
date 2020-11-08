@@ -24,7 +24,6 @@ class _HotNewsWidgetState extends State<HotNewsWidget> {
     return StreamBuilder<ArticleResponse>(
       stream: getHotNewsBloc.subject.stream,
       builder: (context, AsyncSnapshot<ArticleResponse> snapshot) {
-        print('---------------- ${snapshot.hasData}');
         if (snapshot.hasData) {
           if (snapshot.data.error != null && snapshot.data.error.length > 0) {
             return buildErrorWidget(snapshot.data.error);
@@ -53,22 +52,21 @@ class _HotNewsWidgetState extends State<HotNewsWidget> {
       );
     } else {
       return Container(
-        height: 300,
-        child: ListView.builder(
-          itemBuilder: (context, index) {
-            return buildHotNewsTile(articles[index]);
-          },
-          itemCount: articles.length,
+        height: size.height * 0.9,
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: List.generate(
+            articles.length,
+            (index) => buildHotNewsTile(articles[index]),
+          ),
         ),
       );
     }
   }
 
   Container buildHotNewsTile(ArticleModel article) {
-    Size size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.only(top: 10),
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 1),
       child: GestureDetector(
         onTap: () {},
         child: Container(
@@ -109,7 +107,7 @@ class _HotNewsWidgetState extends State<HotNewsWidget> {
                   article.title,
                   textAlign: TextAlign.center,
                   maxLines: 2,
-                  style: TextStyle(height: 1.5, fontSize: 15),
+                  style: TextStyle(height: 1.3, fontSize: 15),
                 ),
               ),
               Stack(
